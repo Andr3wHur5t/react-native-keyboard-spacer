@@ -1,3 +1,5 @@
+[![NPM](https://nodei.co/npm/react-native-keyboard-spacer.png?downloads=true)](https://nodei.co/npm/react-native-keyboard-spacer/)
+
 # react-native-keyboard-spacer
 
 Plug and play iOS react-native keyboard spacer view.
