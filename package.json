@@ -18,15 +18,12 @@
     "spacer"
   ],
   "peerDependencies": {
-    "react-native": ">=0.5"
+    "react-native": ">=0.11"
   },
   "author": "Andrew Hurst",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Andr3wHur5t/react-native-keyboard-spacer/issues"
   },
-  "homepage": "https://github.com/Andr3wHur5t/react-native-keyboard-spacer#readme",
-  "dependencies": {
-    "react-native-keyboardevents": "^0.4.5"
-  }
+  "homepage": "https://github.com/Andr3wHur5t/react-native-keyboard-spacer#readme"
 }
