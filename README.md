@@ -4,7 +4,7 @@
 
 Plug and play iOS react-native keyboard spacer view.
 
-![image](http://giant.gfycat.com/ThriftyCelebratedChital.gif)
+![image](http://fat.gfycat.com/InconsequentialBothAmericankestrel.gif)
 ## Quick Start
 
 Install View: `npm install --save react-native-keyboard-spacer`
@@ -19,7 +19,7 @@ var KeyboardSpacer = require('react-native-keyboard-spacer');
 var {
   AppRegistry,
   StyleSheet,
-  Text,
+  Image,
   View,
   TextInput
 } = React;
@@ -27,9 +27,16 @@ var {
 var DemoApp = React.createClass({
   render: function() {
     return (
-      <View style={[{backgroundColor: 'green', flex: 1}]}>
-        <TextInput style={{backgroundColor: 'yellow', flex: 1}}/>
-        <View style={{backgroundColor: 'red', left: 0, right: 0, height: 5}}/>
+      <View style={[{flex: 1}]}>
+        {/* Some random image to show scaling */}
+        <Image source={{uri: 'http://img11.deviantart.net/072b/i/2011/206/7/0/the_ocean_cherry_tree_by_tomcadogan-d41nzsz.png', static: true}}
+                style={{flex: 1}}/>
+
+        {/* The text input to put on top of the keyboard */}
+        <TextInput style={{left: 0, right: 0, height: 45}}
+             placeholder={'Enter your text!'}/>
+
+        {/* The view that will animate to match the keyboards height */}
         <KeyboardSpacer/>
       </View>
     );
@@ -38,4 +45,3 @@ var DemoApp = React.createClass({
 
 AppRegistry.registerComponent('DemoApp', () => DemoApp);
 ```
-
