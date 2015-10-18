@@ -85,7 +85,7 @@ class KeyboardSpacer extends React.Component {
     }
 
     render() {
-        return (<View style={[{height: this.state.keyboardSpace, left: 0, right: 0, bottom: 0, backgroundColor: '#FFFFFF'}]}/>);
+        return (<View style={[{height: this.state.keyboardSpace, left: 0, right: 0, bottom: 0, backgroundColor: '#FFFFFF'}, this.props.style]}/>);
     }
 }
 
