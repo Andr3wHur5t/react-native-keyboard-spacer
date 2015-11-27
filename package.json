@@ -17,9 +17,6 @@
     "keyboard",
     "spacer"
   ],
-  "peerDependencies": {
-    "react-native": ">=0.11"
-  },
   "author": "Andrew Hurst",
   "license": "MIT",
   "bugs": {
