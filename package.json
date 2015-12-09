@@ -1,6 +1,6 @@
 {
   "name": "react-native-keyboard-spacer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Plug and play react-Native keyboard spacer view.",
   "main": "KeyboardSpacer.js",
   "scripts": {

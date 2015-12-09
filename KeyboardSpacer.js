@@ -73,7 +73,7 @@ class KeyboardSpacer extends React.Component {
 
     componentDidMount() {
         this._listeners = [
-            DeviceEventEmitter.addListener('keyboardDidShow', this.updateKeyboardSpace),
+            DeviceEventEmitter.addListener('keyboardWillShow', this.updateKeyboardSpace),
             DeviceEventEmitter.addListener('keyboardWillHide', this.resetKeyboardSpace)
         ];
     }
