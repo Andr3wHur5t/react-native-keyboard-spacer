@@ -45,3 +45,14 @@ var DemoApp = React.createClass({
 
 AppRegistry.registerComponent('DemoApp', () => DemoApp);
 ```
+### Properties - Basic
+
+| Prop  | Default  | Type | Description |
+| :------------ |:---------------:| :---------------:| :-----|
+| topSpacing | 0 | `number` | Add or subtract additional spacing from keyboard height |
+
+### Properties - Methods
+
+| Prop  | Params  | Type | Description |
+| :------------ |:---------------:| :---------------:| :-----|
+| onToggle | `toggleState` | `function` | onToggle method is called when when keyboard toggles. Returns true or false |
