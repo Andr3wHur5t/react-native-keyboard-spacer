@@ -6,7 +6,8 @@ var React = require('react-native');
 var {
     DeviceEventEmitter,
     LayoutAnimation,
-    View
+    View, 
+    Platform
 } = React;
 
 // From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
@@ -72,10 +73,17 @@ class KeyboardSpacer extends React.Component {
     }
 
     componentDidMount() {
-        this._listeners = [
-            DeviceEventEmitter.addListener('keyboardWillShow', this.updateKeyboardSpace),
-            DeviceEventEmitter.addListener('keyboardWillHide', this.resetKeyboardSpace)
-        ];
+        if (Platform.OS == "android") {
+            this._listeners = [
+                DeviceEventEmitter.addListener('keyboardDidShow', this.updateKeyboardSpace),
+                DeviceEventEmitter.addListener('keyboardDidHide', this.resetKeyboardSpace)
+            ];            
+        } else {
+            this._listeners = [
+                DeviceEventEmitter.addListener('keyboardWillShow', this.updateKeyboardSpace),
+                DeviceEventEmitter.addListener('keyboardWillHide', this.resetKeyboardSpace)
+            ];
+        }
     }
 
     componentWillUnmount() {
