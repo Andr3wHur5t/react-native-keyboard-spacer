@@ -50,6 +50,7 @@ AppRegistry.registerComponent('DemoApp', () => DemoApp);
 | Prop  | Default  | Type | Description |
 | :------------ |:---------------:| :---------------:| :-----|
 | topSpacing | 0 | `number` | Add or subtract additional spacing from keyboard height |
+| animationConfig | [A default animation](https://github.com/Andr3wHur5t/react-native-keyboard-spacer/blob/expose-layout-animations/KeyboardSpacer.js#L14) | `LayoutAnimationConfig` | [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html#content) configuration object |
 
 ### Properties - Methods
 
