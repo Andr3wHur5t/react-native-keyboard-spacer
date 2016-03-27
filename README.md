@@ -55,4 +55,4 @@ AppRegistry.registerComponent('DemoApp', () => DemoApp);
 
 | Prop  | Params  | Type | Description |
 | :------------ |:---------------:| :---------------:| :-----|
-| onToggle | `toggleState` | `function` | onToggle method is called when when keyboard toggles. Returns true or false |
+| onToggle | `toggleState` | `function` | onToggle method is called when when keyboard toggles. Two parameters passed through, keyboardState (boolean, true if keyboard shown) and keyboardSpace (height occupied by keyboard) |
