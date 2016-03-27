@@ -71,7 +71,7 @@ class KeyboardSpacer extends React.Component {
         this.setState({
             keyboardSpace: 0,
             isKeyboardOpened: false
-        }, () => ('onToggle' in this.props ? this.props.onToggle(false, keyboardSpace) : null));
+        }, () => ('onToggle' in this.props ? this.props.onToggle(false, 0) : null));
     }
 
     componentDidMount() {
