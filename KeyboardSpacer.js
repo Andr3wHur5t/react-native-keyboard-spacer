@@ -59,17 +59,19 @@ class KeyboardSpacer extends React.Component {
     updateKeyboardSpace(frames) {
         if (!frames.endCoordinates)
             return;
+        
+        var keyboardSpace = frames.endCoordinates.height + ('topSpacing' in this.props ? this.props.topSpacing : 0); 
         this.setState({
-            keyboardSpace: frames.endCoordinates.height + ('topSpacing' in this.props ? this.props.topSpacing : 0),
+            keyboardSpace: keyboardSpace,
             isKeyboardOpened: true
-        }, () => ('onToggle' in this.props ? this.props.onToggle(true) : null));
+        }, () => ('onToggle' in this.props ? this.props.onToggle(true, keyboardSpace) : null));
     }
 
     resetKeyboardSpace() {
         this.setState({
             keyboardSpace: 0,
             isKeyboardOpened: false
-        }, () => ('onToggle' in this.props ? this.props.onToggle(false) : null));
+        }, () => ('onToggle' in this.props ? this.props.onToggle(false, keyboardSpace) : null));
     }
 
     componentDidMount() {
