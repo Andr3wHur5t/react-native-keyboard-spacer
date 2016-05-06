@@ -1,14 +1,15 @@
 /**
  * Created by andrewhurst on 10/5/15.
  */
-var React = require('react-native');
+var React = require('react');
+var ReactNative = require('react-native');
 
 var {
     DeviceEventEmitter,
     LayoutAnimation,
-    View, 
+    View,
     Platform
-} = React;
+} = ReactNative;
 
 // From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
 const animations = {
@@ -39,7 +40,7 @@ const animations = {
     }
 };
 
-class KeyboardSpacer extends React.Component {
+class KeyboardSpacer extends ReactNative.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -59,8 +60,8 @@ class KeyboardSpacer extends React.Component {
     updateKeyboardSpace(frames) {
         if (!frames.endCoordinates)
             return;
-        
-        var keyboardSpace = frames.endCoordinates.height + ('topSpacing' in this.props ? this.props.topSpacing : 0); 
+
+        var keyboardSpace = frames.endCoordinates.height + ('topSpacing' in this.props ? this.props.topSpacing : 0);
         this.setState({
             keyboardSpace: keyboardSpace,
             isKeyboardOpened: true
@@ -79,7 +80,7 @@ class KeyboardSpacer extends React.Component {
             this._listeners = [
                 DeviceEventEmitter.addListener('keyboardDidShow', this.updateKeyboardSpace),
                 DeviceEventEmitter.addListener('keyboardDidHide', this.resetKeyboardSpace)
-            ];            
+            ];
         } else {
             this._listeners = [
                 DeviceEventEmitter.addListener('keyboardWillShow', this.updateKeyboardSpace),
