@@ -1,14 +1,15 @@
 /**
  * Created by andrewhurst on 10/5/15.
  */
-var React = require('react-native');
+var React = require('react');
+var ReactNative = require('react-native');
 
 var {
     DeviceEventEmitter,
     LayoutAnimation,
     View, 
     Platform
-} = React;
+} = ReactNative;
 
 // From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
 const animations = {
