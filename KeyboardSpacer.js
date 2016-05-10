@@ -12,31 +12,16 @@ var {
 } = ReactNative;
 
 // From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
-const animations = {
-    layout: {
-        spring: {
-            duration: 500,
-            create: {
-                duration: 300,
-                type: LayoutAnimation.Types.easeInEaseOut,
-                property: LayoutAnimation.Properties.opacity
-            },
-            update: {
-                type: LayoutAnimation.Types.spring,
-                springDamping: 200
-            }
-        },
-        easeInEaseOut: {
-            duration: 300,
-            create: {
-                type: LayoutAnimation.Types.easeInEaseOut,
-                property: LayoutAnimation.Properties.scaleXY
-            },
-            update: {
-                delay: 100,
-                type: LayoutAnimation.Types.easeInEaseOut
-            }
-        }
+const defaultAnimation = {
+    duration: 500,
+    create: {
+        duration: 300,
+        type: LayoutAnimation.Types.easeInEaseOut,
+        property: LayoutAnimation.Properties.opacity
+    },
+    update: {
+        type: LayoutAnimation.Types.spring,
+        springDamping: 200
     }
 };
 
@@ -53,8 +38,9 @@ class KeyboardSpacer extends React.Component {
     }
 
     componentWillUpdate(props, state) {
-        if (state.isKeyboardOpened !== this.state.isKeyboardOpened)
-            LayoutAnimation.configureNext(animations.layout.spring);
+        if (state.isKeyboardOpened !== this.state.isKeyboardOpened) {
+            LayoutAnimation.configureNext(props.animationConfig || defaultAnimation);
+        }
     }
 
     updateKeyboardSpace(frames) {
