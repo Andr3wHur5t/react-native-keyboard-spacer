@@ -40,7 +40,7 @@ const animations = {
     }
 };
 
-class KeyboardSpacer extends ReactNative.Component {
+class KeyboardSpacer extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
