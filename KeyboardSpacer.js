@@ -18,29 +18,29 @@ const styles = StyleSheet.create({
   },
 });
 
-// From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
-const defaultAnimation = {
-  duration: 500,
-  create: {
-    duration: 300,
-    type: LayoutAnimation.Types.easeInEaseOut,
-    property: LayoutAnimation.Properties.opacity
-  },
-  update: {
-    type: LayoutAnimation.Types.spring,
-    springDamping: 200
-  }
-};
-
 export default class KeyboardSpacer extends Component {
   static propTypes = {
     topSpacing: PropTypes.number,
     onToggle: PropTypes.func,
     style: View.propTypes.style,
+    animationConfig: PropTypes.object,
   };
 
   static defaultProps = {
     topSpacing: 0,
+    // From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
+    animationConfig: {
+      duration: 500,
+      create: {
+        duration: 300,
+        type: LayoutAnimation.Types.easeInEaseOut,
+        property: LayoutAnimation.Properties.opacity
+      },
+      update: {
+        type: LayoutAnimation.Types.spring,
+        springDamping: 200
+      }
+    },
     onToggle: () => null,
   };
 
@@ -66,7 +66,7 @@ export default class KeyboardSpacer extends Component {
 
   componentWillUpdate(props, state) {
     if (state.isKeyboardOpened !== this.state.isKeyboardOpened) {
-      LayoutAnimation.configureNext(props.animationConfig || defaultAnimation);
+      LayoutAnimation.configureNext(props.animationConfig);
     }
   }
 
