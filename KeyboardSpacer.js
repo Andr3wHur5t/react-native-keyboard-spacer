@@ -62,7 +62,7 @@ class KeyboardSpacer extends React.Component {
     }
 
     componentDidMount() {
-        if (Platform.OS == "android") {
+        if (Platform.OS == "android" && this.props.android) {
             this._listeners = [
                 DeviceEventEmitter.addListener('keyboardDidShow', this.updateKeyboardSpace),
                 DeviceEventEmitter.addListener('keyboardDidHide', this.resetKeyboardSpace)
@@ -76,14 +76,18 @@ class KeyboardSpacer extends React.Component {
     }
 
     componentWillUnmount() {
-        this._listeners.forEach(function(/** EmitterSubscription */listener) {
+        this._listeners && this._listeners.forEach(function(/** EmitterSubscription */listener) {
             listener.remove();
         });
     }
 
     render() {
-        return (<View style={[{height: this.state.keyboardSpace, left: 0, right: 0, bottom: 0}, this.props.style]}/>);
+      if (Platform.OS === 'android' && !this.props.android) { return null; }
+
+      return (<View style={[{height: this.state.keyboardSpace, left: 0, right: 0, bottom: 0}, this.props.style]}/>);
     }
 }
+
+KeyboardSpacer.defaultProps = { android: true };
 
 module.exports = KeyboardSpacer;
