@@ -2,8 +2,8 @@
  * Created by andrewhurst on 10/5/15.
  */
 import React, { Component, PropTypes } from 'react';
-import Keyboard from 'Keyboard';
 import {
+  Keyboard,
   LayoutAnimation,
   View,
   Platform,
