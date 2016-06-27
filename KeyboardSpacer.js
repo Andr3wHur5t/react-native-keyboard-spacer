@@ -6,6 +6,7 @@ import {
   Keyboard,
   LayoutAnimation,
   View,
+  Dimensions,
   Platform,
   StyleSheet
 } from 'react-native';
@@ -78,7 +79,13 @@ export default class KeyboardSpacer extends Component {
     if (!frames.endCoordinates) {
       return;
     }
-    const keyboardSpace = frames.endCoordinates.height + this.props.topSpacing;
+
+    // get updated on rotation
+    const screenHeight = Dimensions.get('window').height;
+    // when external physical keyboard is connected
+    // frames.endCoordinates.height still equals virtual keyboard height
+    // however only the keyboard toolbar is showing if there should be one
+    const keyboardSpace = (screenHeight - frames.endCoordinates.screenY) + this.props.topSpacing;
     this.setState({
       keyboardSpace,
       isKeyboardOpened: true
