@@ -60,7 +60,8 @@ export default class KeyboardSpacer extends Component {
   componentDidMount() {
     const updateListener = Platform.OS === 'android' ? 'keyboardDidShow' : 'keyboardWillShow';
     const resetListener = Platform.OS === 'android' ? 'keyboardDidHide' : 'keyboardWillHide';
-    this._listeners = [
+    const listenAndroid = Platform.OS === 'android' && this.props.android;
+    (listenAndroid || Platform.OS === 'ios') && this._listeners = [
       Keyboard.addListener(updateListener, this.updateKeyboardSpace),
       Keyboard.addListener(resetListener, this.resetKeyboardSpace)
     ];
@@ -73,7 +74,7 @@ export default class KeyboardSpacer extends Component {
   }
 
   componentWillUnmount() {
-    this._listeners.forEach(listener => listener.remove());
+    this._listeners && this._listeners.forEach(listener => listener.remove());
   }
 
   updateKeyboardSpace(frames) {
@@ -95,6 +96,9 @@ export default class KeyboardSpacer extends Component {
   }
 
   render() {
+    if (Platform.OS === 'android' && !this.props.android) {
+      return null;
+    }
     return (
       <View style={[styles.container, { height: this.state.keyboardSpace }, this.props.style]} />
     );
