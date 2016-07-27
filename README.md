@@ -4,7 +4,7 @@
 
 Plug and play iOS react-native keyboard spacer view.
 
-![image](http://fat.gfycat.com/InconsequentialBothAmericankestrel.gif)
+![image](https://media.giphy.com/media/3oEjHJwLyYg7upTyYo/giphy.gif)
 ## Quick Start
 
 Install View: `npm install --save react-native-keyboard-spacer`
@@ -14,34 +14,34 @@ Install View: `npm install --save react-native-keyboard-spacer`
 The view will automatically perform a layout animation when the keyboard appears or disappears.
 
 ```javascript
-var React = require('react-native');
-var KeyboardSpacer = require('react-native-keyboard-spacer');
-var {
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+import React, { Component } from 'react';
+import {
   AppRegistry,
   StyleSheet,
   Image,
   View,
   TextInput
-} = React;
+} from 'react-native';
 
-var DemoApp = React.createClass({
-  render: function() {
+class DemoApp extends Component {
+  render() {
     return (
       <View style={[{flex: 1}]}>
         {/* Some random image to show scaling */}
         <Image source={{uri: 'http://img11.deviantart.net/072b/i/2011/206/7/0/the_ocean_cherry_tree_by_tomcadogan-d41nzsz.png', static: true}}
-                style={{flex: 1}}/>
+                 style={{flex: 1}}/>
 
         {/* The text input to put on top of the keyboard */}
         <TextInput style={{left: 0, right: 0, height: 45}}
-             placeholder={'Enter your text!'}/>
+              placeholder={'Enter your text!'}/>
 
         {/* The view that will animate to match the keyboards height */}
         <KeyboardSpacer/>
       </View>
     );
   }
-});
+}
 
 AppRegistry.registerComponent('DemoApp', () => DemoApp);
 ```
