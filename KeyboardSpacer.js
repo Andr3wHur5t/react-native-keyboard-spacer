@@ -61,10 +61,13 @@ export default class KeyboardSpacer extends Component {
     const updateListener = Platform.OS === 'android' ? 'keyboardDidShow' : 'keyboardWillShow';
     const resetListener = Platform.OS === 'android' ? 'keyboardDidHide' : 'keyboardWillHide';
     const listenAndroid = Platform.OS === 'android' && this.props.android;
-    (listenAndroid || Platform.OS === 'ios') && this._listeners = [
-      Keyboard.addListener(updateListener, this.updateKeyboardSpace),
-      Keyboard.addListener(resetListener, this.resetKeyboardSpace)
-    ];
+    const shouldListen = listenAndroid || Platform.OS === 'ios';
+    if (shouldListen) {
+      this._listeners = [
+        Keyboard.addListener(updateListener, this.updateKeyboardSpace),
+        Keyboard.addListener(resetListener, this.resetKeyboardSpace)
+      ];
+    }
   }
 
   componentWillUpdate(props, state) {
