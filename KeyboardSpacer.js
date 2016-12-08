@@ -19,6 +19,20 @@ const styles = StyleSheet.create({
   },
 });
 
+// From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
+const defaultAnimation = {
+  duration: 500,
+  create: {
+    duration: 300,
+    type: LayoutAnimation.Types.easeInEaseOut,
+    property: LayoutAnimation.Properties.opacity
+  },
+  update: {
+    type: LayoutAnimation.Types.spring,
+    springDamping: 200
+  }
+};
+
 export default class KeyboardSpacer extends Component {
   static propTypes = {
     topSpacing: PropTypes.number,
@@ -60,7 +74,14 @@ export default class KeyboardSpacer extends Component {
       return;
     }
 
-    const animationConfig = LayoutAnimation.create(event.duration, LayoutAnimation.Types[event.easing]);
+    let animationConfig = defaultAnimation;
+    if (Platform.OS === 'ios') {
+      animationConfig = LayoutAnimation.create(
+        event.duration,
+        LayoutAnimation.Types[event.easing],
+        LayoutAnimation.Properties.opacity,
+      );
+    }
     LayoutAnimation.configureNext(animationConfig);
 
     // get updated on rotation
@@ -76,7 +97,14 @@ export default class KeyboardSpacer extends Component {
   }
 
   resetKeyboardSpace(event) {
-    const animationConfig = LayoutAnimation.create(event.duration, LayoutAnimation.Types[event.easing]);
+    let animationConfig = defaultAnimation;
+    if (Platform.OS === 'ios') {
+      animationConfig = LayoutAnimation.create(
+        event.duration,
+        LayoutAnimation.Types[event.easing],
+        LayoutAnimation.Properties.opacity,
+      );
+    }
     LayoutAnimation.configureNext(animationConfig);
 
     this.setState({
