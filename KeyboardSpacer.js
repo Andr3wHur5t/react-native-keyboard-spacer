@@ -24,24 +24,10 @@ export default class KeyboardSpacer extends Component {
     topSpacing: PropTypes.number,
     onToggle: PropTypes.func,
     style: View.propTypes.style,
-    animationConfig: PropTypes.object,
   };
 
   static defaultProps = {
     topSpacing: 0,
-    // From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
-    animationConfig: {
-      duration: 500,
-      create: {
-        duration: 300,
-        type: LayoutAnimation.Types.easeInEaseOut,
-        property: LayoutAnimation.Properties.opacity
-      },
-      update: {
-        type: LayoutAnimation.Types.spring,
-        springDamping: 200
-      }
-    },
     onToggle: () => null,
   };
 
@@ -65,34 +51,34 @@ export default class KeyboardSpacer extends Component {
     ];
   }
 
-  componentWillUpdate(props, state) {
-    if (state.isKeyboardOpened !== this.state.isKeyboardOpened) {
-      LayoutAnimation.configureNext(props.animationConfig);
-    }
-  }
-
   componentWillUnmount() {
     this._listeners.forEach(listener => listener.remove());
   }
 
-  updateKeyboardSpace(frames) {
-    if (!frames.endCoordinates) {
+  updateKeyboardSpace(event) {
+    if (!event.endCoordinates) {
       return;
     }
+
+    const animationConfig = LayoutAnimation.create(event.duration, LayoutAnimation.Types[event.easing]);
+    LayoutAnimation.configureNext(animationConfig);
 
     // get updated on rotation
     const screenHeight = Dimensions.get('window').height;
     // when external physical keyboard is connected
-    // frames.endCoordinates.height still equals virtual keyboard height
+    // event.endCoordinates.height still equals virtual keyboard height
     // however only the keyboard toolbar is showing if there should be one
-    const keyboardSpace = (screenHeight - frames.endCoordinates.screenY) + this.props.topSpacing;
+    const keyboardSpace = (screenHeight - event.endCoordinates.screenY) + this.props.topSpacing;
     this.setState({
       keyboardSpace,
       isKeyboardOpened: true
     }, this.props.onToggle(true, keyboardSpace));
   }
 
-  resetKeyboardSpace() {
+  resetKeyboardSpace(event) {
+    const animationConfig = LayoutAnimation.create(event.duration, LayoutAnimation.Types[event.easing]);
+    LayoutAnimation.configureNext(animationConfig);
+
     this.setState({
       keyboardSpace: 0,
       isKeyboardOpened: false
