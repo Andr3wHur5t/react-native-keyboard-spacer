@@ -6,6 +6,7 @@ import {
   Keyboard,
   LayoutAnimation,
   View,
+  Dimensions,
   Platform,
   StyleSheet
 } from 'react-native';
@@ -18,29 +19,29 @@ const styles = StyleSheet.create({
   },
 });
 
+// From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
+const defaultAnimation = {
+  duration: 500,
+  create: {
+    duration: 300,
+    type: LayoutAnimation.Types.easeInEaseOut,
+    property: LayoutAnimation.Properties.opacity
+  },
+  update: {
+    type: LayoutAnimation.Types.spring,
+    springDamping: 200
+  }
+};
+
 export default class KeyboardSpacer extends Component {
   static propTypes = {
     topSpacing: PropTypes.number,
     onToggle: PropTypes.func,
     style: View.propTypes.style,
-    animationConfig: PropTypes.object,
   };
 
   static defaultProps = {
     topSpacing: 0,
-    // From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
-    animationConfig: {
-      duration: 500,
-      create: {
-        duration: 300,
-        type: LayoutAnimation.Types.easeInEaseOut,
-        property: LayoutAnimation.Properties.opacity
-      },
-      update: {
-        type: LayoutAnimation.Types.spring,
-        springDamping: 200
-      }
-    },
     onToggle: () => null,
   };
 
@@ -64,28 +65,48 @@ export default class KeyboardSpacer extends Component {
     ];
   }
 
-  componentWillUpdate(props, state) {
-    if (state.isKeyboardOpened !== this.state.isKeyboardOpened) {
-      LayoutAnimation.configureNext(props.animationConfig);
-    }
-  }
-
   componentWillUnmount() {
     this._listeners.forEach(listener => listener.remove());
   }
 
-  updateKeyboardSpace(frames) {
-    if (!frames.endCoordinates) {
+  updateKeyboardSpace(event) {
+    if (!event.endCoordinates) {
       return;
     }
-    const keyboardSpace = frames.endCoordinates.height + this.props.topSpacing;
+
+    let animationConfig = defaultAnimation;
+    if (Platform.OS === 'ios') {
+      animationConfig = LayoutAnimation.create(
+        event.duration,
+        LayoutAnimation.Types[event.easing],
+        LayoutAnimation.Properties.opacity,
+      );
+    }
+    LayoutAnimation.configureNext(animationConfig);
+
+    // get updated on rotation
+    const screenHeight = Dimensions.get('window').height;
+    // when external physical keyboard is connected
+    // event.endCoordinates.height still equals virtual keyboard height
+    // however only the keyboard toolbar is showing if there should be one
+    const keyboardSpace = (screenHeight - event.endCoordinates.screenY) + this.props.topSpacing;
     this.setState({
       keyboardSpace,
       isKeyboardOpened: true
     }, this.props.onToggle(true, keyboardSpace));
   }
 
-  resetKeyboardSpace() {
+  resetKeyboardSpace(event) {
+    let animationConfig = defaultAnimation;
+    if (Platform.OS === 'ios') {
+      animationConfig = LayoutAnimation.create(
+        event.duration,
+        LayoutAnimation.Types[event.easing],
+        LayoutAnimation.Properties.opacity,
+      );
+    }
+    LayoutAnimation.configureNext(animationConfig);
+
     this.setState({
       keyboardSpace: 0,
       isKeyboardOpened: false
