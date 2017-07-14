@@ -89,11 +89,11 @@ export default class KeyboardSpacer extends Component {
     // when external physical keyboard is connected
     // event.endCoordinates.height still equals virtual keyboard height
     // however only the keyboard toolbar is showing if there should be one
-    const keyboardSpace = (screenHeight - event.endCoordinates.screenY) + this.props.topSpacing;
+    const keyboardSpace = screenHeight - event.endCoordinates.screenY;
     this.setState({
-      keyboardSpace,
-      isKeyboardOpened: true
-    }, this.props.onToggle(true, keyboardSpace));
+        keyboardSpace,
+        isKeyboardOpened: true
+      }, this.props.onToggle(true, keyboardSpace));
   }
 
   resetKeyboardSpace(event) {
@@ -108,13 +108,20 @@ export default class KeyboardSpacer extends Component {
     LayoutAnimation.configureNext(animationConfig);
 
     this.setState({
-      keyboardSpace: 0,
-      isKeyboardOpened: false
-    }, this.props.onToggle(false, 0));
+        keyboardSpace: 0,
+        isKeyboardOpened: false
+      }, this.props.onToggle(false, 0));
   }
 
   render() {
     return (
-      <View style={[styles.container, { height: this.state.keyboardSpace }, this.props.style]} />);
+      <View
+        style={[
+          styles.container,
+          { height: this.state.keyboardSpace + this.props.topSpacing },
+          this.props.style
+        ]}
+      />
+    );
   }
 }
