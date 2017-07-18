@@ -118,7 +118,11 @@ export default class KeyboardSpacer extends Component {
       <View
         style={[
           styles.container,
-          { height: this.state.keyboardSpace + this.props.topSpacing },
+          {
+            height:
+              this.state.keyboardSpace +
+              (this.state.isKeyboardOpened ? this.props.topSpacing : 0)
+          },
           this.props.style
         ]}
       />
