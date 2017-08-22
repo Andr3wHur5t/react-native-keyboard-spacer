@@ -1,7 +1,7 @@
 /**
  * Created by andrewhurst on 10/5/15.
  */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
   Keyboard,
   LayoutAnimation,
@@ -10,6 +10,7 @@ import {
   Platform,
   StyleSheet
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   container: {
