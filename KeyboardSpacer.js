@@ -9,7 +9,8 @@ import {
   View,
   Dimensions,
   Platform,
-  StyleSheet
+  StyleSheet,
+  ViewPropTypes
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -38,7 +39,7 @@ export default class KeyboardSpacer extends Component {
   static propTypes = {
     topSpacing: PropTypes.number,
     onToggle: PropTypes.func,
-    style: View.propTypes.style,
+    style: (ViewPropTypes && ViewPropTypes.style) || View.propTypes.style,
   };
 
   static defaultProps = {
