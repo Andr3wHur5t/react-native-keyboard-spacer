@@ -8,6 +8,7 @@ import {
   LayoutAnimation,
   View,
   Dimensions,
+  ViewPropTypes,
   Platform,
   StyleSheet
 } from 'react-native';
@@ -38,7 +39,7 @@ export default class KeyboardSpacer extends Component {
   static propTypes = {
     topSpacing: PropTypes.number,
     onToggle: PropTypes.func,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
   };
 
   static defaultProps = {
