@@ -72,7 +72,7 @@ export default class KeyboardSpacer extends Component {
   }
 
   updateKeyboardSpace(event) {
-    if (!event.endCoordinates) {
+    if (!event.endCoordinates || this.state.isKeyboardOpened) {
       return;
     }
 
@@ -99,6 +99,10 @@ export default class KeyboardSpacer extends Component {
   }
 
   resetKeyboardSpace(event) {
+    if (!this.state.isKeyboardOpened) {
+      return;
+    }
+
     let animationConfig = defaultAnimation;
     if (Platform.OS === 'ios') {
       animationConfig = LayoutAnimation.create(
