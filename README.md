@@ -1,3 +1,16 @@
+### Package Deprecated
+This repo is longer manintained, you can use `react-native-community/hooks` to do something like this:
+```
+{Platform.OS === 'ios' && keyboard.keyboardShown && (
+  <View
+    style={{
+      height: keyboard.keyboardHeight - 80,
+      backgroundColor: 'transparent',
+    }}
+  />
+)}
+```
+----
 [![NPM](https://nodei.co/npm-dl/react-native-keyboard-spacer.png?months=3&height=2)](https://nodei.co/npm/react-native-keyboard-spacer/)
 
 # react-native-keyboard-spacer
