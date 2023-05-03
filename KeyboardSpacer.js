@@ -73,6 +73,7 @@ export default class KeyboardSpacer extends Component {
 
   updateKeyboardSpace(event) {
     if (!event.endCoordinates) {
+      console.log("Ballu shapatar");
       return;
     }
 
